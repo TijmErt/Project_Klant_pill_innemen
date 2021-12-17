@@ -35,7 +35,6 @@ namespace Pil_ingenomen
             this.btPil_Ingenomen = new System.Windows.Forms.Button();
             this.btPil_Niet_Ingenomen = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.btOpl = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -131,7 +130,7 @@ namespace Pil_ingenomen
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 16);
+            this.label1.Size = new System.Drawing.Size(41, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
@@ -164,7 +163,6 @@ namespace Pil_ingenomen
         private System.Windows.Forms.Button btPil_Ingenomen;
         private System.Windows.Forms.Button btPil_Niet_Ingenomen;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button btOpl;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
