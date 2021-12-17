@@ -36,7 +36,11 @@ namespace Pil_ingenomen
             this.btPil_Niet_Ingenomen = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btOpl = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbxSelectPatient_Temp
@@ -99,11 +103,45 @@ namespace Pil_ingenomen
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Temp Patient select";
             // 
+            // btOpl
+            // 
+            this.btOpl.Location = new System.Drawing.Point(39, 470);
+            this.btOpl.Name = "btOpl";
+            this.btOpl.Size = new System.Drawing.Size(121, 44);
+            this.btOpl.TabIndex = 6;
+            this.btOpl.Text = "Opslaan";
+            this.btOpl.UseVisualStyleBackColor = true;
+            this.btOpl.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(166, 470);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(121, 44);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Nieuwe aantal Pillen";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 545);
+            this.ClientSize = new System.Drawing.Size(323, 593);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.btOpl);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btPil_Niet_Ingenomen);
             this.Controls.Add(this.btPil_Ingenomen);
@@ -112,6 +150,8 @@ namespace Pil_ingenomen
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -125,6 +165,9 @@ namespace Pil_ingenomen
         private System.Windows.Forms.Button btPil_Niet_Ingenomen;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btOpl;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
