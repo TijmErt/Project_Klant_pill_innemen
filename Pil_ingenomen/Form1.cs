@@ -16,5 +16,30 @@ namespace Pil_ingenomen
         {
             InitializeComponent();
         }
+
+        private void cbxSelectPatient_Temp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbxFilterOp_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbxPillen_Aantal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btPil_Ingenomen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btPil_Niet_Ingenomen_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
