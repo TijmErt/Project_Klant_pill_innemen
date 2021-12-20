@@ -13,11 +13,27 @@ namespace Pil_ingenomen
 {
     public partial class Form1 : Form
     {
+        Sql SQL = new Sql();
         public Form1()
         {
             InitializeComponent();
-            loadSQL("SELECT patient.voornaam FROM patient ");
+            MySqlDataReader reader = SQL.loadSQL("SELECT patient.voornaam FROM patient ");
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    cbxSelectPatient_Temp.Items.Add(reader.GetString("voornaam"));
+                }
+            }
+            else
+            {
+                Console.WriteLine("No rows found.");
+            }
+
         }
+
+        /*
         private void loadSQL(string query)
         {
             cbxSelectPatient_Temp.Items.Clear();
@@ -52,6 +68,9 @@ namespace Pil_ingenomen
                 MessageBox.Show(ex.Message);
             }
         }
+        */
+
+        /*
         private void reloadSQL(string query)
         {
             string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=medu_database;";
@@ -75,13 +94,26 @@ namespace Pil_ingenomen
                 Console.WriteLine("No rows found.");
             }
             databaseConnection.Close();
-        }
+           }
+        */
         private void cbxSelectPatient_Temp_SelectedIndexChanged(object sender, EventArgs e)
         {
             lbxPillen_Aantal.Items.Clear();
             string patientNaam = cbxSelectPatient_Temp.GetItemText(cbxSelectPatient_Temp.SelectedItem);
-            reloadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.medicijn_id, inname_moment.aantal, medicijn.id, medicijn.medicijn_naam FROM dokter, patient, inname_moment, medicijn WHERE dokter.id = patient.dokter_id AND inname_moment.patient_id = patient.id AND patient.voornaam = '" + patientNaam +"' AND medicijn.id = inname_moment.medicijn_id; ");
             
+            MySqlDataReader reader = SQL.loadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.medicijn_id, inname_moment.aantal, medicijn.id, medicijn.medicijn_naam FROM dokter, patient, inname_moment, medicijn WHERE dokter.id = patient.dokter_id AND inname_moment.patient_id = patient.id AND patient.voornaam = '" + patientNaam +"' AND medicijn.id = inname_moment.medicijn_id; ");
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    lbxPillen_Aantal.Items.Add(reader.GetString("medicijn_naam") + " " + reader.GetString("aantal"));
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("No rows found.");
+            }
         }
 
         private void cbxFilterOp_SelectedIndexChanged(object sender, EventArgs e)
