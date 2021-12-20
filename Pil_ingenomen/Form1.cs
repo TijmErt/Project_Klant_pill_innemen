@@ -14,10 +14,11 @@ namespace Pil_ingenomen
     public partial class Form1 : Form
     {
         Sql SQL = new Sql();
+        MySqlDataReader reader;
         public Form1()
         {
             InitializeComponent();
-            MySqlDataReader reader = SQL.loadSQL("SELECT patient.voornaam FROM patient ");
+            reader = SQL.loadSQL("SELECT patient.voornaam FROM patient ");
 
             if (reader.HasRows)
             {
@@ -32,6 +33,18 @@ namespace Pil_ingenomen
             }
 
         }
+
+                    /*
+            string aantalPillen = lbxDate.SelectedItem.ToString();
+            string[] pillenAantal = aantalPillen.Split(';',' ');
+
+
+            foreach(var sub in pillenAantal)
+            {
+                Console.WriteLine($"Substring: {sub}");
+            }
+            */
+
 
         /*
         private void loadSQL(string query)
@@ -98,15 +111,17 @@ namespace Pil_ingenomen
         */
         private void cbxSelectPatient_Temp_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lbxPillen_Aantal.Items.Clear();
+            lbxDate.Items.Clear();
             string patientNaam = cbxSelectPatient_Temp.GetItemText(cbxSelectPatient_Temp.SelectedItem);
             
-            MySqlDataReader reader = SQL.loadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.medicijn_id, inname_moment.aantal, medicijn.id, medicijn.medicijn_naam, inname_moment.date FROM dokter, patient, inname_moment, medicijn WHERE dokter.id = patient.dokter_id AND inname_moment.patient_id = patient.id AND patient.voornaam = '" + patientNaam +"' AND medicijn.id = inname_moment.medicijn_id; ");
+            reader = SQL.loadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.date FROM dokter, patient, inname_moment, medicijn WHERE dokter.id = patient.dokter_id AND inname_moment.patient_id = patient.id AND patient.voornaam = '" + patientNaam +"' AND medicijn.id = inname_moment.medicijn_id; ");
+            
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    lbxPillen_Aantal.Items.Add(reader.GetString("Date")+ " " +reader.GetString("medicijn_naam") + " " + reader.GetString("aantal"));
+                    
+                    lbxDate.Items.Add(reader.GetString("date"));
 
                 }
             }
@@ -123,7 +138,24 @@ namespace Pil_ingenomen
 
         private void lbxPillen_Aantal_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lbxMedicijn.Items.Clear();
+            string patientNaam = cbxSelectPatient_Temp.GetItemText(cbxSelectPatient_Temp.SelectedItem);
+            string date = lbxDate.GetItemText(lbxDate.SelectedItem);
+            Console.WriteLine(date);
 
+            reader = SQL.loadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.date, medicijn.id, medicijn.medicijn_naam FROM dokter, patient, inname_moment, medicijn WHERE dokter.id = patient.dokter_id AND inname_moment.patient_id = patient.id AND patient.voornaam ='"+ patientNaam +"' AND medicijn.id = inname_moment.medicijn_id AND date ='"+ date +"';" );
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    lbxMedicijn.Items.Add(reader.GetString("medicijn_naam"));
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("No rows found.");
+            }
         }
 
         private void btPil_Ingenomen_Click(object sender, EventArgs e)
@@ -137,6 +169,11 @@ namespace Pil_ingenomen
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbxMedicijn_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
