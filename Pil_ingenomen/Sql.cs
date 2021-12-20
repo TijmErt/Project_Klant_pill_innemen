@@ -1,9 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,17 +8,16 @@ using System.Windows.Forms;
 
 namespace Pil_ingenomen
 {
-    public partial class Form1 : Form
+    class Sql
     {
-        public Form1()
+        private string query;
+        public Sql()
         {
-            InitializeComponent();
-            loadSQL("SELECT patient.voornaam FROM patient ");
+
         }
         private void loadSQL(string query)
         {
-            cbxSelectPatient_Temp.Items.Clear();
-            string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=medu_database;";
+            string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=sqldatabase;";
             MySqlConnection databaseConnection = new MySqlConnection(connString);
             MySqlCommand cmd = new MySqlCommand(query, databaseConnection);
             cmd.CommandTimeout = 60;
@@ -35,7 +31,7 @@ namespace Pil_ingenomen
                 {
                     while (reader.Read())
                     {
-                        cbxSelectPatient_Temp.Items.Add(reader.GetString("voornaam"));
+                        
                     }
                 }
                 else
@@ -54,7 +50,8 @@ namespace Pil_ingenomen
         }
         private void reloadSQL(string query)
         {
-            string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=medu_database;";
+            
+            string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=sqldatabase;";
             MySqlConnection databaseConnection = new MySqlConnection(connString);
             MySqlCommand cmd = new MySqlCommand(query, databaseConnection);
             cmd.CommandTimeout = 60;
@@ -66,7 +63,11 @@ namespace Pil_ingenomen
             {
                 while (reader.Read())
                 {
-                    lbxPillen_Aantal.Items.Add(reader.GetString("medicijn_naam") + " " + reader.GetString("aantal"));
+                    // As our database, the array will contain : ID 0, FIRST_NAME 1,LAST_NAME 2, ADDRESS 3
+                    // Do something with every received database ROW
+                    
+                    /* nudAantalPillen.Value = Convert.ToInt32(reader.GetString(8)); */
+
 
                 }
             }
@@ -75,38 +76,6 @@ namespace Pil_ingenomen
                 Console.WriteLine("No rows found.");
             }
             databaseConnection.Close();
-        }
-        private void cbxSelectPatient_Temp_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lbxPillen_Aantal.Items.Clear();
-            string patientNaam = cbxSelectPatient_Temp.GetItemText(cbxSelectPatient_Temp.SelectedItem);
-            reloadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.medicijn_id, inname_moment.aantal, medicijn.id, medicijn.medicijn_naam FROM dokter, patient, inname_moment, medicijn WHERE inname_moment.patient_id = patient.id AND patient.voornaam = '"+ patientNaam +"' AND medicijn.id = inname_moment.medicijn_id; ");
-            
-        }
-
-        private void cbxFilterOp_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbxPillen_Aantal_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btPil_Ingenomen_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btPil_Niet_Ingenomen_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
