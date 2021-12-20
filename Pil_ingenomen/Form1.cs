@@ -80,7 +80,7 @@ namespace Pil_ingenomen
         {
             lbxPillen_Aantal.Items.Clear();
             string patientNaam = cbxSelectPatient_Temp.GetItemText(cbxSelectPatient_Temp.SelectedItem);
-            reloadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.medicijn_id, inname_moment.aantal, medicijn.id, medicijn.medicijn_naam FROM dokter, patient, inname_moment, medicijn WHERE inname_moment.patient_id = patient.id AND patient.voornaam = '"+ patientNaam +"' AND medicijn.id = inname_moment.medicijn_id; ");
+            reloadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.medicijn_id, inname_moment.aantal, medicijn.id, medicijn.medicijn_naam FROM dokter, patient, inname_moment, medicijn WHERE dokter.id = patient.dokter_id AND inname_moment.patient_id = patient.id AND patient.voornaam = '" + patientNaam +"' AND medicijn.id = inname_moment.medicijn_id; ");
             
         }
 
