@@ -30,7 +30,6 @@ namespace Pil_ingenomen
         private void InitializeComponent()
         {
             this.cbxSelectPatient_Temp = new System.Windows.Forms.ComboBox();
-            this.cbxFilterOp = new System.Windows.Forms.ComboBox();
             this.lbxPillen_Aantal = new System.Windows.Forms.ListBox();
             this.btPil_Ingenomen = new System.Windows.Forms.Button();
             this.btPil_Niet_Ingenomen = new System.Windows.Forms.Button();
@@ -52,28 +51,19 @@ namespace Pil_ingenomen
             this.cbxSelectPatient_Temp.TabIndex = 0;
             this.cbxSelectPatient_Temp.SelectedIndexChanged += new System.EventHandler(this.cbxSelectPatient_Temp_SelectedIndexChanged);
             // 
-            // cbxFilterOp
-            // 
-            this.cbxFilterOp.FormattingEnabled = true;
-            this.cbxFilterOp.Location = new System.Drawing.Point(166, 92);
-            this.cbxFilterOp.Name = "cbxFilterOp";
-            this.cbxFilterOp.Size = new System.Drawing.Size(121, 24);
-            this.cbxFilterOp.TabIndex = 1;
-            this.cbxFilterOp.SelectedIndexChanged += new System.EventHandler(this.cbxFilterOp_SelectedIndexChanged);
-            // 
             // lbxPillen_Aantal
             // 
             this.lbxPillen_Aantal.FormattingEnabled = true;
             this.lbxPillen_Aantal.ItemHeight = 16;
-            this.lbxPillen_Aantal.Location = new System.Drawing.Point(39, 122);
+            this.lbxPillen_Aantal.Location = new System.Drawing.Point(12, 76);
             this.lbxPillen_Aantal.Name = "lbxPillen_Aantal";
-            this.lbxPillen_Aantal.Size = new System.Drawing.Size(248, 292);
+            this.lbxPillen_Aantal.Size = new System.Drawing.Size(299, 100);
             this.lbxPillen_Aantal.TabIndex = 2;
             this.lbxPillen_Aantal.SelectedIndexChanged += new System.EventHandler(this.lbxPillen_Aantal_SelectedIndexChanged);
             // 
             // btPil_Ingenomen
             // 
-            this.btPil_Ingenomen.Location = new System.Drawing.Point(39, 420);
+            this.btPil_Ingenomen.Location = new System.Drawing.Point(31, 198);
             this.btPil_Ingenomen.Name = "btPil_Ingenomen";
             this.btPil_Ingenomen.Size = new System.Drawing.Size(121, 44);
             this.btPil_Ingenomen.TabIndex = 3;
@@ -83,7 +73,7 @@ namespace Pil_ingenomen
             // 
             // btPil_Niet_Ingenomen
             // 
-            this.btPil_Niet_Ingenomen.Location = new System.Drawing.Point(166, 420);
+            this.btPil_Niet_Ingenomen.Location = new System.Drawing.Point(158, 198);
             this.btPil_Niet_Ingenomen.Name = "btPil_Niet_Ingenomen";
             this.btPil_Niet_Ingenomen.Size = new System.Drawing.Size(121, 44);
             this.btPil_Niet_Ingenomen.TabIndex = 4;
@@ -105,7 +95,7 @@ namespace Pil_ingenomen
             // 
             // btOpl
             // 
-            this.btOpl.Location = new System.Drawing.Point(39, 470);
+            this.btOpl.Location = new System.Drawing.Point(31, 248);
             this.btOpl.Name = "btOpl";
             this.btOpl.Size = new System.Drawing.Size(121, 44);
             this.btOpl.TabIndex = 6;
@@ -118,7 +108,7 @@ namespace Pil_ingenomen
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(166, 470);
+            this.groupBox2.Location = new System.Drawing.Point(158, 248);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(121, 44);
             this.groupBox2.TabIndex = 7;
@@ -131,7 +121,7 @@ namespace Pil_ingenomen
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 16);
+            this.label1.Size = new System.Drawing.Size(41, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
@@ -139,14 +129,13 @@ namespace Pil_ingenomen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 593);
+            this.ClientSize = new System.Drawing.Size(323, 355);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btOpl);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btPil_Niet_Ingenomen);
             this.Controls.Add(this.btPil_Ingenomen);
             this.Controls.Add(this.lbxPillen_Aantal);
-            this.Controls.Add(this.cbxFilterOp);
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
@@ -159,7 +148,6 @@ namespace Pil_ingenomen
         #endregion
 
         private System.Windows.Forms.ComboBox cbxSelectPatient_Temp;
-        private System.Windows.Forms.ComboBox cbxFilterOp;
         private System.Windows.Forms.ListBox lbxPillen_Aantal;
         private System.Windows.Forms.Button btPil_Ingenomen;
         private System.Windows.Forms.Button btPil_Niet_Ingenomen;

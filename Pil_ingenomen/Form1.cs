@@ -101,12 +101,12 @@ namespace Pil_ingenomen
             lbxPillen_Aantal.Items.Clear();
             string patientNaam = cbxSelectPatient_Temp.GetItemText(cbxSelectPatient_Temp.SelectedItem);
             
-            MySqlDataReader reader = SQL.loadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.medicijn_id, inname_moment.aantal, medicijn.id, medicijn.medicijn_naam FROM dokter, patient, inname_moment, medicijn WHERE dokter.id = patient.dokter_id AND inname_moment.patient_id = patient.id AND patient.voornaam = '" + patientNaam +"' AND medicijn.id = inname_moment.medicijn_id; ");
+            MySqlDataReader reader = SQL.loadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.medicijn_id, inname_moment.aantal, medicijn.id, medicijn.medicijn_naam, inname_moment.date FROM dokter, patient, inname_moment, medicijn WHERE dokter.id = patient.dokter_id AND inname_moment.patient_id = patient.id AND patient.voornaam = '" + patientNaam +"' AND medicijn.id = inname_moment.medicijn_id; ");
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    lbxPillen_Aantal.Items.Add(reader.GetString("medicijn_naam") + " " + reader.GetString("aantal"));
+                    lbxPillen_Aantal.Items.Add(reader.GetString("Date")+ " " +reader.GetString("medicijn_naam") + " " + reader.GetString("aantal"));
 
                 }
             }
