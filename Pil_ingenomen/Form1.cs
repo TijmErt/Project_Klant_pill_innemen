@@ -18,14 +18,24 @@ namespace Pil_ingenomen
         public Form1()
         {
             InitializeComponent();
-            reader = SQL.loadSQL("SELECT patient.voornaam FROM patient ");
+            reader = SQL.loadSQL("SELECT voornaam, id FROM patient ");
 
             if (reader.HasRows)
             {
+                Dictionary<string, string> comboSource = new Dictionary<string, string>();
+
                 while (reader.Read())
                 {
-                    cbxSelectPatient_Temp.Items.Add(reader.GetString("voornaam"));
+                    comboSource.Add(reader.GetString("id"), reader.GetString("voornaam"));
+
+
+                    //cbxSelectPatient_Temp.Items.Add( { reader.GetString("id") reader.GetString("voornaam")} );
+                    
                 }
+                cbxSelectPatient_Temp.DataSource = new BindingSource(comboSource, null);
+                cbxSelectPatient_Temp.DisplayMember = "Value";
+                cbxSelectPatient_Temp.ValueMember = "Key";
+                
             }
             else
             {
@@ -112,16 +122,15 @@ namespace Pil_ingenomen
         private void cbxSelectPatient_Temp_SelectedIndexChanged(object sender, EventArgs e)
         {
             lbxDate.Items.Clear();
-            string patientNaam = cbxSelectPatient_Temp.GetItemText(cbxSelectPatient_Temp.SelectedItem);
-            
-            reader = SQL.loadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.date FROM dokter, patient, inname_moment, medicijn WHERE dokter.id = patient.dokter_id AND inname_moment.patient_id = patient.id AND patient.voornaam = '" + patientNaam +"' AND medicijn.id = inname_moment.medicijn_id; ");
+            reader = SQL.loadSQL("SELECT DISTINCT inname_moment.date FROM inname_moment WHERE inname_moment.patient_id = "+ ((KeyValuePair<string, string>)cbxSelectPatient_Temp.SelectedItem).Key+";");
             
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    
-                    lbxDate.Items.Add(reader.GetString("date"));
+                    string Date = ( reader.GetDateTime("date").ToString("yyyy'-'MM'-'dd HH':'mm':'ss") );
+              
+                    lbxDate.Items.Add(Date);
 
                 }
             }
@@ -149,7 +158,6 @@ namespace Pil_ingenomen
                 while (reader.Read())
                 {
                     lbxMedicijn.Items.Add(reader.GetString("medicijn_naam"));
-
                 }
             }
             else

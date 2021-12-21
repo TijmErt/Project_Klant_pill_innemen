@@ -24,7 +24,7 @@ namespace Pil_ingenomen
             databaseConnection.Open();
             reader = cmd.ExecuteReader();
             return (reader);
-            databaseConnection.Close();
+            
 
 
 
