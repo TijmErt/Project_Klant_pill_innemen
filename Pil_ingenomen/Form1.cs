@@ -18,7 +18,7 @@ namespace Pil_ingenomen
         public Form1()
         {
             InitializeComponent();
-            reader = SQL.loadSQL("SELECT voornaam, id FROM patient ");
+            reader = SQL.loadSQL("SELECT first_name, id FROM patient ");
 
             if (reader.HasRows)
             {
@@ -26,7 +26,7 @@ namespace Pil_ingenomen
 
                 while (reader.Read())
                 {
-                    comboSource.Add(reader.GetString("id"), reader.GetString("voornaam"));
+                    comboSource.Add(reader.GetString("id"), reader.GetString("first_name"));
 
 
                     //cbxSelectPatient_Temp.Items.Add( { reader.GetString("id") reader.GetString("voornaam")} );
@@ -122,7 +122,8 @@ namespace Pil_ingenomen
         private void cbxSelectPatient_Temp_SelectedIndexChanged(object sender, EventArgs e)
         {
             lbxDate.Items.Clear();
-            reader = SQL.loadSQL("SELECT DISTINCT inname_moment.date FROM inname_moment WHERE inname_moment.patient_id = "+ ((KeyValuePair<string, string>)cbxSelectPatient_Temp.SelectedItem).Key+";");
+            lbxMedicijn.Items.Clear();
+            reader = SQL.loadSQL("SELECT DISTINCT consumption_date.date FROM consumption_date WHERE consumption_date.patient_id = " + ((KeyValuePair<string, string>)cbxSelectPatient_Temp.SelectedItem).Key+";");
             
             if (reader.HasRows)
             {
@@ -148,16 +149,15 @@ namespace Pil_ingenomen
         private void lbxPillen_Aantal_SelectedIndexChanged(object sender, EventArgs e)
         {
             lbxMedicijn.Items.Clear();
-            string patientNaam = cbxSelectPatient_Temp.GetItemText(cbxSelectPatient_Temp.SelectedItem);
             string date = lbxDate.GetItemText(lbxDate.SelectedItem);
             Console.WriteLine(date);
 
-            reader = SQL.loadSQL("SELECT patient.id, patient.voornaam, inname_moment.patient_id, inname_moment.date, medicijn.id, medicijn.medicijn_naam FROM dokter, patient, inname_moment, medicijn WHERE dokter.id = patient.dokter_id AND inname_moment.patient_id = patient.id AND patient.voornaam ='"+ patientNaam +"' AND medicijn.id = inname_moment.medicijn_id AND date ='"+ date +"';" );
+            reader = SQL.loadSQL("SELECT medicine.name FROM medicine, consumption_date WHERE consumption_date.patient_id = " + ((KeyValuePair<string, string>)cbxSelectPatient_Temp.SelectedItem).Key + " AND consumption_date.medicine_id = medicine.id AND consumption_date.date ='"+ date +"';");
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    lbxMedicijn.Items.Add(reader.GetString("medicijn_naam"));
+                    lbxMedicijn.Items.Add(reader.GetString("name"));
                 }
             }
             else
@@ -182,6 +182,30 @@ namespace Pil_ingenomen
         }
 
         private void lbxMedicijn_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string medicijn = lbxMedicijn.GetItemText(lbxMedicijn.SelectedItem);
+            string date = lbxDate.GetItemText(lbxDate.SelectedItem);
+            Console.WriteLine(medicijn);
+            Console.WriteLine(date);
+
+            reader = SQL.loadSQL("SELECT medicine.name, medicine.consumption_method, consumption_date.amount, consumption_date.is_consumed FROM medicine, consumption_date WHERE consumption_date.patient_id = " + ((KeyValuePair<string, string>)cbxSelectPatient_Temp.SelectedItem).Key + " AND medicine.name = '" + medicijn +"' AND consumption_date.medicine_id = medicine.id AND consumption_date.date ='" + date + "';");
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    lbmedicineName.Text = reader.GetString("name");
+                    lbdose.Text = reader.GetString("amount"); 
+                    lbwijzeInname.Text = reader.GetString("consumption_method");
+                    lbingenomen.Text = reader.GetString("is_consumed");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No rows found.");
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

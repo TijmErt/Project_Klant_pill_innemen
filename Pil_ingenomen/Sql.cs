@@ -10,13 +10,14 @@ namespace Pil_ingenomen
 {
     class Sql
     {
+        private string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=medu_database;";
         public Sql()
         {
 
         }
         public MySqlDataReader loadSQL(string query)
         {
-            string connString = "datasource=127.0.0.1;port=3306;username=root;password=;database=medu_database;";
+            
             MySqlConnection databaseConnection = new MySqlConnection(connString);
             MySqlCommand cmd = new MySqlCommand(query, databaseConnection);
             cmd.CommandTimeout = 60;
@@ -25,9 +26,6 @@ namespace Pil_ingenomen
             reader = cmd.ExecuteReader();
             return (reader);
             
-
-
-
         }
 
     }
